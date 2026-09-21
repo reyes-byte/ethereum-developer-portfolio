@@ -22,5 +22,8 @@ namespace eth {
     using Bytes = std::vector<std::uint8_t>;
 
     void write_u32(Bytes& output, std::uint32_t value);
+    void write_u64(Bytes& output, std::uint64_t value);
+    
+    
 }
 

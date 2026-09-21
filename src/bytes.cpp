@@ -10,5 +10,11 @@ void write_u32(Bytes& output, std::uint32_t value) {
     }
 }
 
+void write_u64(Bytes& output, std::uint64_t value) {
+    for (int shift = 56; shift >= 0; shift -= 8){
+        output.push_back(static_cast<std::uint8_t>(value >> shift) & 0xffu);
+    }
+}
+
 
 }

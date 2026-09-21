@@ -17,12 +17,39 @@
 #pragma once 
 #include <cstdint>
 #include <vector>
+#include <array>
+#include <limits>
+#include <stdexcept>
+#include <span>
+
+
+struct BlockHeader {
+    std::uint32_t version;
+    std::uint64_t height;
+    std::array<std::uint8_t, 32> previous_hash;
+    std::uint64_t timestamp;
+    std::uint64_t nonce;
+};
 
 namespace eth {
     using Bytes = std::vector<std::uint8_t>;
+    using Hash = std::array<std::uint8_t, 32>;
+    using ByteView = std::span<const std::uint8_t>;
 
-    void write_u32(Bytes& output, std::uint32_t value);
-    void write_u64(Bytes& output, std::uint64_t value);
+    class ByteWriter {
+    public:  
+        void write_u32(std::uint32_t value);
+        void write_u64(std::uint64_t value);
+        void write_fixed(ByteView value);
+        void write_sized(ByteView value);
+        void write_hash(const Hash& hash);
+
+        /*warn when values are discarded*/
+        [[nodiscard]] const Bytes& bytes() const noexcept;
+    private:
+        Bytes bytes_;
+
+    };
     
     
 }

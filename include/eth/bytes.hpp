@@ -13,7 +13,6 @@
   - Reject values that cannot be represented
 */
 
-
 #pragma once 
 #include <cstdint>
 #include <vector>
@@ -22,16 +21,8 @@
 #include <stdexcept>
 #include <span>
 
-
-struct BlockHeader {
-    std::uint32_t version;
-    std::uint64_t height;
-    std::array<std::uint8_t, 32> previous_hash;
-    std::uint64_t timestamp;
-    std::uint64_t nonce;
-};
-
 namespace eth {
+
     using Bytes = std::vector<std::uint8_t>;
     using Hash = std::array<std::uint8_t, 32>;
     using ByteView = std::span<const std::uint8_t>;
@@ -51,6 +42,4 @@ namespace eth {
 
     };
     
-    
 }
-
